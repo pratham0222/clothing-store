@@ -32,7 +32,7 @@ const Navigation = () => {
         </NavLinks>
         {isCartOpen && <CartDropdown/>}
       </NavigationContainer>
-      <Outlet/>
+      <Outlet/> {/*acts as placeholder  for where child components should be rendered within a parent component.*/} 
     </Fragment>
   );
 };

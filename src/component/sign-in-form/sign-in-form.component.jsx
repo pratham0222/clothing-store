@@ -3,6 +3,7 @@ import { signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from "../..
 import FormInput from "../form-input/form-input.component";
 import {SignInContainer,ButtonsContainer}  from  './sign-in-form.styles.jsx';
 import Button,{BUTTON_TYPE_CLASSES} from "../button/button.component";
+import { useNavigate } from "react-router-dom";
 const defaultFormFields = {
     email: '',
     password: ''
@@ -10,6 +11,7 @@ const defaultFormFields = {
 const SignInForm = () =>{
     const [formFields,setFormFields]=useState(defaultFormFields);
     const { email, password} = formFields;
+    const navigate= useNavigate();
 
     const resetFormFields = ()=>{
         setFormFields(defaultFormFields);
@@ -17,6 +19,8 @@ const SignInForm = () =>{
 
     const signInWithGoogle = async () =>{
         await signInWithGooglePopup();
+        navigate('/');
+
     }
 
     const handleChange= (event) =>{
@@ -28,6 +32,7 @@ const SignInForm = () =>{
         try{
             await signInAuthUserWithEmailAndPassword(email,password);
             resetFormFields();
+            navigate('/');
         }catch(error){
             switch(error.code){
                 case 'auth/wrong-password':
